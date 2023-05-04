@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "sebl-farm-assist",
+  "private_key_id": "484a3a6edaf336fa60e6d8e23c0d9ec218a14623",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDCcRCBKiWHwONH\nreiXamS1nzV31N2+9x7servbhvuWnBVDXPvzP6yaLvC+1cyQXBGboa8YXRDGs7LV\nLBFdLB02rjBK3CAcyT5ZUp9beHwdKrxVK7cUdoHB28PKiyq+C1POhBPPRsgr8ieb\nKhafEzF/kSMJNchNji+F6y6eDfe3jvSZF27Bx8Qe7ztLRukWdvewIyiMwfXVyF+8\njTBmj3sd8wUu+Cm8KkGwpSiUJjsC0MibOpv8BiLrhOEhTrdZk9+lGy32ifDY5Uoy\nAKG/QcoFznnKrd1WEdggFIxCbFyxz8ZfMxyjuLMZMFLNHL2fal12OKo49wlam315\nbYR/caJFAgMBAAECggEAAytM7btY9ZT5v1srctMA8DWM7WE9T1WqHd2Zk+g9JS/H\nEvGAM8SXv22WGUN/0YyGnEbu2n1N1DHtRMHdSJZQUD9XjyjLpzHKf9yJDLhygWvc\nZPZQ8MGbt3lUVXKeOuRmtHN8+oBjVoAHEDrdN9uGuixh6fkD75ZVL6AX2ECkXHat\n6ixq0SjU8M+/GqVVN+AbeeIF7saiC5uPwxZiJ+Dt3U/bVo6ipwk4wryIHMa/WOi2\nPZGbipO8yrHdb6z+TUMqgiZ6qStWYqc26L5wNyEAptHeU0cpg40MLDpb7HWETdLG\n5I44JQH26G/2fp4rhEW5cvVh1SQMJxLXSOEoCWUoIQKBgQDinR/eTX2wnznO++lQ\ni2b1iuC/2xT8Udb3SnGVFONyUW5d4rMgu1KIxfYoh/UzQJQ2YMZFNrBUcNYg+RJY\nHVJiJEfvUQN6wBbLz/qkboKB2wVfwTte1cKeKV6Q/jxXUJAML8cqPsrPd6DJgM6X\nRP+sYod+D2R3phtyg0V6EJValQKBgQDbp+zxBSFE/q9pa4BMuEfirBHr4La5TtT/\nzBEA1Vixdr7lRXxOn88u4YGeyluUrtmDvclF6QSh1piCrIG4Seyf5iAujbgZMJbW\nRPDednEf3c8ZM/NSq/QPmOALxE08ntzk9x0ra2n5lXLfej29mCbvENtIjpRL2rAh\nE9lKpn7s8QKBgQDbmQ+MyOMICQRoA82wc6YuQ4pP4OmRKW167fTrVvahjS+6Yzja\neywbxlooJLgEFoyJtXXtFHYDHeUixrp0ENYIrMfYrVUF2qc8kip8tWpak/e9Nu9l\nkxepVMWDFBs9MaClbpc95ON78J0rJ1sLU52/WyuZiSj+mUT3zyXAh9lzkQKBgEIO\nrT4Keefi4+PDNZFc9hlf//+805bE819+AjsK7iJogJ44mFqYytjhbnbPil0bfESX\nRblli0QUYkciE9zVNnkb3t/BNPU2XJZRo1Jzsi+QKCD/M5TQK5SpN++x+Dxb1jhx\nbG9LXVJ2tFYqz/h9km/g1OFsJ4LsYH2CF53QlmkxAoGBAKzr7yt26uloLBElhMy2\nWXn4vn8NlFEXkWzeD7Ow1RCAC5I/9I5REMra1ohBV9+zvcHWAFxzTMrKOTSgGqtc\nPrXNtXGgM8SMvNmfYsJheduYGVcpqOf2i66JoxnsMUYwjSc5V/JK/gny/aIe3Uof\nSIqwQ9bVAn6x1+hGO6DNHuhe\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-8bcuu@sebl-farm-assist.iam.gserviceaccount.com",
+  "client_id": "118306127667757766067",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-8bcuu%40sebl-farm-assist.iam.gserviceaccount.com"
+}
