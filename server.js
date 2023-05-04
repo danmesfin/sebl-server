@@ -1,21 +1,24 @@
 const express = require("express");
 const app = express();
 
-const admin = require("firebase-admin");
+//const admin = require("firebase-admin");
 const auth = require("./routes/auth");
-const serviceAccount = require("./config/serviceAccountKey.json");
+//const serviceAccount = require("./config/serviceAccountKey.json");
 
 const userRoutes = require("./routes/users.routes");
 const cropsRoutes = require("./routes/crops.routes");
 const diseaseRoutes = require("./routes/disease.routes");
 const cultivationTipsRoutes = require("./routes/cultivation-tips.routes");
+const middleware = require("./middleware");
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  // databaseURL: "https://your-project-id.firebaseio.com",
-});
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount),
+//   // databaseURL: "https://your-project-id.firebaseio.com",
+// });
 
-app.use("/hello", auth);
+app.use(middleware.verifyToken);
+
+app.use("/protected", auth);
 
 app.use("/users", userRoutes);
 app.use("/crops", cropsRoutes);

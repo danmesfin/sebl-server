@@ -1,3 +1,5 @@
+const admin = require("../config/firebase-config");
+
 const verifyToken = (req, res, next) => {
   const idToken = req.headers.authorization.split(" ")[1];
 
