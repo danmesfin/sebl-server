@@ -7,7 +7,7 @@ const serviceAccount = require("./config/serviceAccountKey.json");
 
 const userRoutes = require("./routes/users.routes");
 const cropsRoutes = require("./routes/crops.routes");
-//const diseaseRoutes = require("./routes/disease");
+const diseaseRoutes = require("./routes/disease.routes");
 //const cultivationTipsRoutes = require("./routes/cultivationTipsRoutes");
 
 admin.initializeApp({
