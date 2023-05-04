@@ -5,7 +5,7 @@ const admin = require("firebase-admin");
 const auth = require("./routes/auth");
 const serviceAccount = require("./config/serviceAccountKey.json");
 
-//const userRoutes = require("./routes/usersRoutes");
+const userRoutes = require("./routes/users.routes");
 const cropsRoutes = require("./routes/crops.routes");
 //const diseaseRoutes = require("./routes/diseaseRoutes");
 //const cultivationTipsRoutes = require("./routes/cultivationTipsRoutes");
@@ -17,7 +17,7 @@ admin.initializeApp({
 
 app.use("/hello", auth);
 
-//app.use("/users", userRoutes);
+app.use("/users", userRoutes);
 app.use("/crops", cropsRoutes);
 
 app.get("/", (req, res) => {
