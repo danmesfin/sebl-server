@@ -8,7 +8,7 @@ const serviceAccount = require("./config/serviceAccountKey.json");
 const userRoutes = require("./routes/users.routes");
 const cropsRoutes = require("./routes/crops.routes");
 const diseaseRoutes = require("./routes/disease.routes");
-//const cultivationTipsRoutes = require("./routes/cultivationTipsRoutes");
+const cultivationTipsRoutes = require("./routes/cultivation-tips.routes");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -19,6 +19,8 @@ app.use("/hello", auth);
 
 app.use("/users", userRoutes);
 app.use("/crops", cropsRoutes);
+app.use("/diseases", diseaseRoutes);
+app.use("/cultivation-tips", cultivationTipsRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello, World!");
