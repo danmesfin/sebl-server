@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-
+const bodyParser = require("body-parser");
 //const admin = require("firebase-admin");
 const auth = require("./routes/auth");
 //const serviceAccount = require("./config/serviceAccountKey.json");
@@ -18,6 +18,12 @@ const middleware = require("./middleware");
 // });
 
 //app.use(middleware.verifyToken);
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(bodyParser.json());
 
 app.use("/protected", auth);
 

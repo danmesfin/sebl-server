@@ -31,13 +31,15 @@ async function getPost(req, res) {
 
 async function createPost(req, res) {
   try {
-    const { title, content } = req.body;
+    const { title, content, post_image_url } = req.body;
     const newPost = await db.collection("posts").add({
       title,
       content,
-      userId: req.user.uid, // using the decoded token from the middleware
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      post_image_url,
+      author: req.user.uid, // using the decoded token from the middleware
+      created_at: new Date(),
+      likes_count: 0,
+      dislikes_count: 0,
     });
     res.json({ id: newPost.id });
   } catch (error) {
@@ -48,20 +50,20 @@ async function createPost(req, res) {
 
 async function updatePost(req, res) {
   try {
-    const { title, content } = req.body;
+    const { title, content, post_image_url } = req.body;
     const postRef = db.collection("posts").doc(req.params.id);
     const post = await postRef.get();
     if (!post.exists) {
       return res.status(404).json({ error: "Post not found" });
     }
-    if (post.data().userId !== req.user.uid) {
+    if (post.data().author !== req.user.uid) {
       // check if the user who created the post is the same as the one making the update
       return res.status(403).json({ error: "Forbidden" });
     }
     await postRef.update({
       title,
       content,
-      updatedAt: new Date(),
+      post_image_url,
     });
     res.json({ message: "Post updated successfully" });
   } catch (error) {
@@ -77,7 +79,7 @@ async function deletePost(req, res) {
     if (!post.exists) {
       return res.status(404).json({ error: "Post not found" });
     }
-    if (post.data().userId !== req.user.uid) {
+    if (post.data().author !== req.user.uid) {
       // check if the user who created the post is the same as the one making the delete request
       return res.status(403).json({ error: "Forbidden" });
     }
@@ -89,10 +91,4 @@ async function deletePost(req, res) {
   }
 }
 
-module.exports = {
-  getAllPosts,
-  getPost,
-  createPost,
-  updatePost,
-  deletePost,
-};
+module.exports = { getAllPosts, getPost, createPost, updatePost, deletePost };
