@@ -16,7 +16,7 @@ const middleware = require("./middleware");
 //   // databaseURL: "https://your-project-id.firebaseio.com",
 // });
 
-app.use(middleware.verifyToken);
+//app.use(middleware.verifyToken);
 
 app.use("/protected", auth);
 

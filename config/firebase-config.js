@@ -3,6 +3,9 @@ const serviceAccount = require("./serviceAccountKey.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://sebl-farm-assist.firebaseio.com",
 });
 
-module.exports = admin;
+const db = admin.firestore();
+
+module.exports = { db, admin };
