@@ -7,7 +7,7 @@ const auth = require("./routes/auth");
 
 const userRoutes = require("./routes/users.routes");
 const cropsRoutes = require("./routes/crops.routes");
-const diseaseRoutes = require("./routes/disease.routes");
+const diseaseControlRoutes = require("./routes/disease.routes");
 const cultivationTipsRoutes = require("./routes/cultivation-tips.routes");
 const postsRoutes = require("./routes/posts.routes");
 const commentsRoutes = require("./routes/comments.routes");
@@ -30,7 +30,7 @@ app.use("/protected", auth);
 
 app.use("/users", userRoutes);
 app.use("/crops", cropsRoutes);
-app.use("/diseases", diseaseRoutes);
+app.use("/disease-control", diseaseControlRoutes);
 app.use("/tips", cultivationTipsRoutes);
 app.use("/posts", postsRoutes);
 app.use("/comments", commentsRoutes);

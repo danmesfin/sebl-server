@@ -1,7 +1,4 @@
-const { firestore } = require("firebase-admin");
-
-// Get a reference to the Firestore database
-const db = firestore();
+const { db } = require("../config/firebase-config");
 
 // Define the collection name for disease control methods
 const DISEASE_CONTROL_COLLECTION = "DiseaseControlMethods";
@@ -46,13 +43,9 @@ const getDiseaseControlMethodsByDiseaseName = async (req, res) => {
 };
 
 // Create a new disease control method
-async function createDiseaseControlMethod(
-  diseaseName,
-  methodType,
-  title,
-  content
-) {
+async function createDiseaseControlMethod(req, res) {
   try {
+    const { diseaseName, methodType, title, content } = req.body;
     const docRef = await db
       .collection("DiseaseControlMethods")
       .doc(diseaseName)
@@ -63,7 +56,7 @@ async function createDiseaseControlMethod(
       });
 
     console.log(`Disease control method created with ID: ${docRef.id}`);
-    return docRef.id;
+    res.status(500).send({ id: docRef.id });
   } catch (error) {
     console.error("Error creating disease control method:", error);
   }
