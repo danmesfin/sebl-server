@@ -1,0 +1,85 @@
+tips (collection)
+  |
+  -- wheat (document)
+  |    |
+  |    -- cropType: "Wheat"
+  |    |
+  |    -- cropSelection (subcollection)
+  |    |    |
+  |    |    -- document
+  |    |    |    |
+  |    |    |    -- title: "Crop Selection"
+  |    |    |    -- content: "Tips for selecting the right crops for your wheat farm"
+  |    |    |
+  |    |    -- document
+  |    |         |
+  |    |         -- title: "Crop Rotation"
+  |    |         -- content: "Tips for crop rotation with wheat to improve soil fertility"
+  |    |
+  |    -- soilPreparation (subcollection)
+  |    |    |
+  |    |    -- document
+  |    |    |    |
+  |    |    |    -- title: "Soil Preparation"
+  |    |    |    -- content: "Tips for preparing the soil for wheat planting"
+  |    |    |
+  |    |    -- document
+  |    |         |
+  |    |         -- title: "Composting"
+  |    |         -- content: "Tips for making and using compost to improve soil quality"
+  |    |
+  |    -- seedSelection (subcollection)
+  |    |    |
+  |    |    -- document
+  |    |    |    |
+  |    |    |    -- title: "Seed Selection"
+  |    |    |    -- content: "Tips for selecting the best seeds for your wheat crops"
+  |    |    |
+  |    |    -- document
+  |    |         |
+  |    |         -- title: "Seed Storage"
+  |    |         -- content: "Tips for storing wheat seeds to maintain their quality"
+  |    |
+  |    -- seedSowing (subcollection)
+  |    |    |
+  |    |    -- document
+  |    |         |
+  |    |         -- title: "Seed Sowing Tips"
+  |    |         -- content: "Tips for sowing wheat seeds in your farm"
+  |    |
+  |    -- irrigation (subcollection)
+  |    |    |
+  |    |    -- document
+  |    |         |
+  |    |         -- title: "Irrigation Tips"
+  |    |         -- content: "Tips for providing proper irrigation to wheat crops"
+  |    |
+  |    -- fertilizers (subcollection)
+  |    |    |
+  |    |    -- document
+  |    |         |
+  |    |         -- title: "Fertilizers"
+  |    |         -- content: "Tips for using fertilizers in your wheat farm"
+  |    |
+  |    -- weedManagement (subcollection)
+  |    |    |
+  |    |    -- document
+  |    |         |
+  |    |         -- title: "Weed Management"
+  |    |         -- content: "Tips for managing weeds in your wheat farm"
+  |    |
+  |    -- harvesting (subcollection)
+  |         |
+  |         -- document
+  |              |
+  |              -- title: "Harvesting"
+  |              -- content: "Tips for harvesting wheat crops"
+  |
+  -- corn (document)
+       |
+       -- cropType: "Corn"
+       |
+       -- cropSelection 
+       |    |
+       |    -- document
+       |         |

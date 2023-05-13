@@ -31,7 +31,7 @@ app.use("/protected", auth);
 app.use("/users", userRoutes);
 app.use("/crops", cropsRoutes);
 app.use("/diseases", diseaseRoutes);
-app.use("/cultivation-tips", cultivationTipsRoutes);
+app.use("/tips", cultivationTipsRoutes);
 app.use("/posts", postsRoutes);
 app.use("/comments", commentsRoutes);
 
