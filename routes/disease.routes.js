@@ -7,7 +7,7 @@ const {
   createDiseaseControlMethod,
   updateDiseaseControlMethodByName,
   deleteDiseaseControlMethodByName,
-} = require("../controllers/disease.controller");
+} = require("../controllers/diseases.controllers");
 
 // Get all disease control methods
 router.get("/disease-control", getAllDiseaseControlMethods);
