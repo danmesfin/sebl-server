@@ -5,6 +5,8 @@ const bodyParser = require("body-parser");
 const auth = require("./routes/auth");
 //const serviceAccount = require("./config/serviceAccountKey.json");
 
+const port = process.env.PORT || 3001;
+
 const userRoutes = require("./routes/users.routes");
 const cropsRoutes = require("./routes/crops.routes");
 const diseaseControlRoutes = require("./routes/disease.routes");
@@ -39,6 +41,6 @@ app.get("/", (req, res) => {
   res.send("Hello, World!");
 });
 
-app.listen(3000, () => {
-  console.log("Server listening on port 3000");
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 });
