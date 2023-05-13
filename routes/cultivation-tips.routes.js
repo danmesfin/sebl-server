@@ -1,8 +1,26 @@
 const express = require("express");
 const router = express.Router();
-const CultivationTipsController = require("../controllers/cultivation-tips.controllers");
-//const { verifyToken } = require("../middleware/auth.middleware");
+const {
+  createTip,
+  getAllTips,
+  getTipById,
+  updateTipById,
+  deleteTipById,
+} = require("../controllers/cultivation-tips.controllers");
 
-router.get("/:crop", CultivationTipsController.getCultivationTips);
+// Create a new tip
+router.post("/", createTip);
+
+// Get all tips
+router.get("/", getAllTips);
+
+// Get a tip by ID
+router.get("/:id", getTipById);
+
+// Update a tip by ID
+router.put("/:id", updateTipById);
+
+// Delete a tip by ID
+router.delete("/:id", deleteTipById);
 
 module.exports = router;

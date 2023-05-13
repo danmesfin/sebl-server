@@ -10,6 +10,7 @@ const cropsRoutes = require("./routes/crops.routes");
 const diseaseRoutes = require("./routes/disease.routes");
 const cultivationTipsRoutes = require("./routes/cultivation-tips.routes");
 const postsRoutes = require("./routes/posts.routes");
+const commentsRoutes = require("./routes/comments.routes");
 const middleware = require("./middleware");
 
 // admin.initializeApp({
@@ -32,6 +33,7 @@ app.use("/crops", cropsRoutes);
 app.use("/diseases", diseaseRoutes);
 app.use("/cultivation-tips", cultivationTipsRoutes);
 app.use("/posts", postsRoutes);
+app.use("/comments", commentsRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello, World!");
