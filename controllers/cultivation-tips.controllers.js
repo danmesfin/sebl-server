@@ -4,16 +4,16 @@ const { db } = require("../config/firebase-config");
 async function createTip(req, res) {
   try {
     const { cropType, category, title, content } = req.body;
-    const newTip = await db
+    const newTipRef = db
       .collection("tips")
       .doc(cropType)
       .collection(category)
-      .add({
-        title,
-        content,
-        created_at: new Date(),
-      });
-    res.json({ id: newTip.id });
+      .doc(title); // use title as the ID of the document
+    await newTipRef.set({
+      content,
+      created_at: new Date(),
+    });
+    res.json({ id: newTipRef.id });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Something went wrong" });
@@ -23,12 +23,13 @@ async function createTip(req, res) {
 // Get all tips for a crop and category
 async function getAllTips(req, res) {
   try {
-    const { cropType, category } = req.params;
+    const { cropType, category, title } = req.params;
     const tips = [];
     const tipDocs = await db
       .collection("tips")
       .doc(cropType)
       .collection(category)
+      .doc(title)
       .get();
     tipDocs.forEach((doc) => {
       tips.push({ id: doc.id, ...doc.data() });
@@ -43,12 +44,13 @@ async function getAllTips(req, res) {
 // Get a single tip by id
 async function getTipById(req, res) {
   try {
-    const { cropType, category, id } = req.params;
+    const { cropType, category, title } = req.params;
+    console.log("crop type:", cropType + category + title);
     const tip = await db
       .collection("tips")
       .doc(cropType)
       .collection(category)
-      .doc(id)
+      .doc(title)
       .get();
     if (!tip.exists) {
       return res.status(404).json({ error: "Tip not found" });

@@ -15,12 +15,12 @@ router.post("/", createTip);
 router.get("/", getAllTips);
 
 // Get a tip by ID
-router.get("/:id", getTipById);
+router.get("/:cropType/:category/:title", getTipById);
 
 // Update a tip by ID
-router.put("/:id", updateTipById);
+router.put("/:cropType/:category/:title", updateTipById);
 
 // Delete a tip by ID
-router.delete("/:id", deleteTipById);
+router.delete("/:cropType/:category/:title", deleteTipById);
 
 module.exports = router;
