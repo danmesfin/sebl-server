@@ -36,7 +36,7 @@ async function createPost(req, res) {
       title,
       content,
       post_image_url,
-      author: req.body.uid, // using the decoded token from the middleware == req.user.uid,
+      author: req.user.uid, // using the decoded token from the middleware == req.user.uid,
       created_at: new Date(),
       likes_count: 0,
       dislikes_count: 0,
