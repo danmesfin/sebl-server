@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const postController = require("../controllers/posts.controller");
-//const middleware = require("../middlewares/authMiddleware");
+const { verifyToken } = require("../middleware/auth.middleware");
 
 // Create a new post
-router.post("/new", postController.createPost);
+router.post("/new", verifyToken, postController.createPost);
 
 // Get all posts
 router.get("/", postController.getAllPosts);

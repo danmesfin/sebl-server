@@ -5,6 +5,7 @@ class Middleware {
     console.log("auhorization".req.headers.authorization);
     const idToken = req.headers.authorization.split(" ")[1];
     console.log("id token".idToken);
+
     admin
       .auth()
       .verifyIdToken(idToken)
