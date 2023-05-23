@@ -20,7 +20,7 @@ const middleware = require("./middleware");
 //   // databaseURL: "https://your-project-id.firebaseio.com",
 // });
 
-app.use(middleware.verifyToken);
+//app.use(middleware.verifyToken);
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));

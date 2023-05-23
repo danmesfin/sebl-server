@@ -18,13 +18,13 @@ router.get(
 // Update disease control method by name
 router.patch(
   "/:diseaseName",
-  diseaseController.updateDiseaseControlMethodByName
+  diseaseController.updateDiseaseControlMethodByDiseaseName
 );
 
 // Delete disease control method by name
 router.delete(
   "/:diseaseName",
-  diseaseController.deleteDiseaseControlMethodByName
+  diseaseController.deleteDiseaseControlMethodByDiseaseName
 );
 
 module.exports = router;

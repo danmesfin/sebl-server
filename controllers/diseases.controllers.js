@@ -10,7 +10,10 @@ const getAllDiseaseControlMethods = async (req, res) => {
     const snapshot = await db.collection(DISEASE_CONTROL_COLLECTION).get();
 
     // Extract the data from each document and add it to an array
-    const data = snapshot.docs.map((doc) => doc.data());
+    const data = snapshot.docs.map((doc) => ({
+      diseaseName: doc.id,
+      ...doc.data(),
+    }));
 
     // Send the response with the data
     res.status(200).json(data);
@@ -28,11 +31,14 @@ const getDiseaseControlMethodsByDiseaseName = async (req, res) => {
     // Query the Firestore collection for documents that match the disease name
     const snapshot = await db
       .collection(DISEASE_CONTROL_COLLECTION)
-      .where("diseaseName", "==", diseaseName)
+      .doc(diseaseName)
       .get();
 
-    // Extract the data from each document and add it to an array
-    const data = snapshot.docs.map((doc) => doc.data());
+    if (!snapshot.exists) {
+      return res.status(404).send("Disease control methods not found");
+    }
+
+    const data = snapshot.data();
 
     // Send the response with the data
     res.status(200).json(data);
@@ -45,77 +51,54 @@ const getDiseaseControlMethodsByDiseaseName = async (req, res) => {
 // Create a new disease control method
 async function createDiseaseControlMethod(req, res) {
   try {
-    const { diseaseName, methodType, title, content } = req.body;
-    const docRef = await db
-      .collection("DiseaseControlMethods")
-      .doc(diseaseName)
-      .collection(methodType)
-      .add({
-        title: title,
-        content: content,
-      });
+    const { diseaseName, title, naturalControl, chemicalControl } = req.body;
 
-    console.log(`Disease control method created with ID: ${docRef.id}`);
-    res.status(500).send({ id: docRef.id });
+    await db.collection(DISEASE_CONTROL_COLLECTION).doc(diseaseName).set({
+      title: title,
+      naturalControl: naturalControl,
+      chemicalControl: chemicalControl,
+    });
+
+    console.log(`Disease control method created for ${diseaseName}`);
+    res.status(200).send("Disease control method created");
   } catch (error) {
     console.error("Error creating disease control method:", error);
+    res.status(500).send("Error creating disease control method");
   }
 }
 
-// Update a disease control method by name
-async function updateDiseaseControlMethodByName(
-  diseaseName,
-  methodType,
-  methodName,
-  newData
-) {
+// Update a disease control method by disease name
+async function updateDiseaseControlMethodByDiseaseName(req, res) {
   try {
-    const docRef = await db
-      .collection("DiseaseControlMethods")
-      .doc(diseaseName)
-      .collection(methodType)
-      .doc(methodName);
+    const { diseaseName } = req.params;
+    const { title, naturalControl, chemicalControl } = req.body;
 
-    await docRef.update(newData);
+    await db.collection(DISEASE_CONTROL_COLLECTION).doc(diseaseName).update({
+      title: title,
+      naturalControl: naturalControl,
+      chemicalControl: chemicalControl,
+    });
 
-    console.log(
-      `Disease control method with name '${methodName}' updated successfully`
-    );
-    return true;
+    console.log(`Disease control method updated for ${diseaseName}`);
+    res.status(200).send("Disease control method updated");
   } catch (error) {
-    console.error(
-      `Error updating disease control method with name '${methodName}':`,
-      error
-    );
-    return false;
+    console.error("Error updating disease control method:", error);
+    res.status(500).send("Error updating disease control method");
   }
 }
 
-// Delete a disease control method by name
-async function deleteDiseaseControlMethodByName(
-  diseaseName,
-  methodType,
-  methodName
-) {
+// Delete a disease control method by disease name
+async function deleteDiseaseControlMethodByDiseaseName(req, res) {
   try {
-    const docRef = await db
-      .collection("DiseaseControlMethods")
-      .doc(diseaseName)
-      .collection(methodType)
-      .doc(methodName);
+    const { diseaseName } = req.params;
 
-    await docRef.delete();
+    await db.collection(DISEASE_CONTROL_COLLECTION).doc(diseaseName).delete();
 
-    console.log(
-      `Disease control method with name '${methodName}' deleted successfully`
-    );
-    return true;
+    console.log(`Disease control method deleted for ${diseaseName}`);
+    res.status(200).send("Disease control method deleted");
   } catch (error) {
-    console.error(
-      `Error deleting disease control method with name '${methodName}':`,
-      error
-    );
-    return false;
+    console.error("Error deleting disease control method:", error);
+    res.status(500).send("Error deleting disease control method");
   }
 }
 
@@ -123,6 +106,6 @@ module.exports = {
   getAllDiseaseControlMethods,
   getDiseaseControlMethodsByDiseaseName,
   createDiseaseControlMethod,
-  updateDiseaseControlMethodByName,
-  deleteDiseaseControlMethodByName,
+  updateDiseaseControlMethodByDiseaseName,
+  deleteDiseaseControlMethodByDiseaseName,
 };
