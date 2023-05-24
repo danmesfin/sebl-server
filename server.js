@@ -14,7 +14,7 @@ const cultivationTipsRoutes = require("./routes/cultivation-tips.routes");
 const postsRoutes = require("./routes/posts.routes");
 const commentsRoutes = require("./routes/comments.routes");
 //const middleware = require("./middleware");
-import { verifyToken } from "./middleware/auth.middleware";
+const { verifyToken } = require("./middleware/auth.middleware");
 // admin.initializeApp({
 //   credential: admin.credential.cert(serviceAccount),
 //   // databaseURL: "https://your-project-id.firebaseio.com",
