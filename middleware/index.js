@@ -1,10 +1,10 @@
-const admin = require("../config/firebase-config");
+const { admin } = require("../config/firebase-config");
 
 class Middleware {
   verifyToken = (req, res, next) => {
     console.log("auhorization".req.headers.authorization);
     const idToken = req.headers.authorization.split(" ")[1];
-    console.log("id token".idToken);
+    console.log("id token", idToken);
 
     admin
       .auth()
