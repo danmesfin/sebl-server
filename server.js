@@ -13,14 +13,9 @@ const diseaseControlRoutes = require("./routes/disease.routes");
 const cultivationTipsRoutes = require("./routes/cultivation-tips.routes");
 const postsRoutes = require("./routes/posts.routes");
 const commentsRoutes = require("./routes/comments.routes");
-//const middleware = require("./middleware");
-const { verifyToken } = require("./middleware/auth.middleware");
-// admin.initializeApp({
-//   credential: admin.credential.cert(serviceAccount),
-//   // databaseURL: "https://your-project-id.firebaseio.com",
-// });
+const middleware = require("./middleware");
 
-app.use(verifyToken);
+app.use(middleware.verifyToken);
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
