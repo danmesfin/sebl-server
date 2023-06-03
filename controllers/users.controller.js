@@ -6,14 +6,14 @@ async function createUser(req, res) {
     const { name, email } = req.body;
     const { uid } = req.user; // Access the decoded user ID from the middleware
 
-    // Add the user to the Firestore collection
-    const newUserRef = await db.collection("users").add({
+    // Set the user document with the decoded user ID as the document ID
+    await db.collection("users").doc(uid).set({
       name,
       email,
       uid, // Store the decoded user ID in the Firestore document
     });
 
-    res.status(201).json({ id: newUserRef.id });
+    res.status(201).json({ id: uid });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Something went wrong" });
