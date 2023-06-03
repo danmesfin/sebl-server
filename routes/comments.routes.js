@@ -18,4 +18,10 @@ router.put("/:commentId", commentsController.updateComment);
 // Delete a comment by ID
 router.delete("/:commentId", commentsController.deleteComment);
 
+// like a comment
+router.post("/like/:commentId", commentsController.createComment);
+
+// dislike a comment
+router.post("/disLike/:commentId", commentsController.createComment);
+
 module.exports = router;

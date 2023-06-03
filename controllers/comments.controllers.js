@@ -20,6 +20,7 @@ async function createComment(req, res) {
 
 // Get all comments for a post
 async function getCommentsForPost(req, res) {
+  console.log("post id", req.params.postId);
   try {
     const commentsRef = db
       .collection("comments")
@@ -29,6 +30,7 @@ async function getCommentsForPost(req, res) {
     snapshot.forEach((doc) => {
       comments.push({ id: doc.id, ...doc.data() });
     });
+
     res.json(comments);
   } catch (error) {
     console.error(error);
@@ -94,10 +96,62 @@ async function deleteComment(req, res) {
   }
 }
 
+// Add a like to a comment
+async function addLikeToComment(req, res) {
+  try {
+    const commentRef = db.collection("comments").doc(req.params.commentId);
+    const comment = await commentRef.get();
+
+    if (!comment.exists) {
+      return res.status(404).json({ error: "Comment not found" });
+    }
+
+    const currentLikes = comment.data().likes_count || 0;
+
+    await commentRef.update({
+      likes_count: currentLikes + 1,
+    });
+
+    res.json({ message: "Like added to comment" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Something went wrong" });
+  }
+}
+
+// Remove a like from a comment
+async function removeLikeFromComment(req, res) {
+  try {
+    const commentRef = db.collection("comments").doc(req.params.commentId);
+    const comment = await commentRef.get();
+
+    if (!comment.exists) {
+      return res.status(404).json({ error: "Comment not found" });
+    }
+
+    const currentLikes = comment.data().likes_count || 0;
+
+    if (currentLikes === 0) {
+      return res.status(400).json({ error: "Comment has no likes" });
+    }
+
+    await commentRef.update({
+      likes_count: currentLikes - 1,
+    });
+
+    res.json({ message: "Like removed from comment" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Something went wrong" });
+  }
+}
+
 module.exports = {
   createComment,
   updateComment,
   deleteComment,
   getComment,
   getCommentsForPost,
+  addLikeToComment,
+  removeLikeFromComment,
 };
