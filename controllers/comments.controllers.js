@@ -3,11 +3,11 @@ const { db } = require("../config/firebase-config");
 // Create a new comment
 async function createComment(req, res) {
   try {
-    const { content, postId } = req.body;
+    const { content, post_id } = req.body;
     const newComment = await db.collection("comments").add({
       content,
       author: db.collection("users").doc(req.user.uid),
-      post: db.collection("posts").doc(postId),
+      post: db.collection("posts").doc(post_id),
       created_at: new Date(),
       likes_count: 0,
     });
