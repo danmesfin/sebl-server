@@ -1,31 +1,35 @@
 const { db } = require("../config/firebase-config");
 
+// Get all posts
 async function getAllPosts(req, res) {
   try {
     const postsRef = db.collection("posts");
     const snapshot = await postsRef.get();
     const posts = [];
-    snapshot.forEach((doc) => {
-      posts.push({ id: doc.id, ...doc.data() });
-    });
-    // Fetch author details and construct comments array
-    await Promise.all(
-      snapshot.docs.map(async (post) => {
-        const postData = post.data();
-        const authorRef = postData.author;
-        const authorSnapshot = await authorRef.get();
-        const authorData = authorSnapshot.data();
 
-        posts.push({
-          id: post.id,
-          author: {
-            name: authorData.name, // Replace with the actual field name for the author's name
-            uid: authorData.uid, // Replace with the actual field name for the author's UID
-          },
-          ...postData,
-        });
-      })
-    );
+    for (const doc of snapshot.docs) {
+      const postData = doc.data();
+
+      const authorRef = postData.author;
+      const authorSnapshot = await authorRef.get();
+      const authorData = authorSnapshot.data();
+
+      const post = {
+        id: doc.id,
+        author: {
+          name: authorData.name,
+          uid: authorData.uid,
+        },
+        likes_count: postData.likes_count,
+        post_image_url: postData.post_image_url,
+        created_at: postData.created_at,
+        title: postData.title,
+        content: postData.content,
+      };
+
+      posts.push(post);
+    }
+
     res.json(posts);
   } catch (error) {
     console.error(error);
@@ -33,6 +37,7 @@ async function getAllPosts(req, res) {
   }
 }
 
+// Get a post by ID
 async function getPost(req, res) {
   try {
     const postRef = db.collection("posts").doc(req.params.postId);
@@ -47,12 +52,16 @@ async function getPost(req, res) {
     const authorData = authorSnapshot.data();
 
     res.json({
-      id: post.id,
+      id: postData.id,
       author: {
-        name: authorData.name, // Replace with the actual field name for the author's name
-        uid: authorData.uid, // Replace with the actual field name for the author's UID
+        name: authorData.name,
+        uid: authorData.uid,
       },
-      ...postData,
+      likes_count: postData.likes_count,
+      post_image_url: postData.post_image_url,
+      created_at: postData.created_at,
+      title: postData.title,
+      content: postData.content,
     });
   } catch (error) {
     console.error(error);
