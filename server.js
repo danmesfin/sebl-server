@@ -15,7 +15,7 @@ const postsRoutes = require("./routes/posts.routes");
 const commentsRoutes = require("./routes/comments.routes");
 const middleware = require("./middleware");
 
-//app.use(middleware.verifyToken);
+app.use(middleware.verifyToken);
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
