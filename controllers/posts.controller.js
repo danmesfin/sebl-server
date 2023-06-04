@@ -17,7 +17,7 @@ async function getAllPosts(req, res) {
 
 async function getPost(req, res) {
   try {
-    const postRef = db.collection("posts").doc(req.params.PostId);
+    const postRef = db.collection("posts").doc(req.params.postId);
     const post = await postRef.get();
     if (!post.exists) {
       return res.status(404).json({ error: "Post not found" });
@@ -51,7 +51,7 @@ async function createPost(req, res) {
 async function updatePost(req, res) {
   try {
     const { title, content, post_image_url } = req.body;
-    const postRef = db.collection("posts").doc(req.params.PostId);
+    const postRef = db.collection("posts").doc(req.params.postId);
     const post = await postRef.get();
     if (!post.exists) {
       return res.status(404).json({ error: "Post not found" });
@@ -74,7 +74,7 @@ async function updatePost(req, res) {
 
 async function deletePost(req, res) {
   try {
-    const postRef = db.collection("posts").doc(req.params.PostId);
+    const postRef = db.collection("posts").doc(req.params.postId);
     const post = await postRef.get();
     if (!post.exists) {
       return res.status(404).json({ error: "Post not found" });
