@@ -27,9 +27,28 @@ async function getCommentsForPost(req, res) {
       .where("post", "==", db.collection("posts").doc(req.params.postId));
     const snapshot = await commentsRef.get();
     const comments = [];
-    snapshot.forEach((doc) => {
-      comments.push({ id: doc.id, ...doc.data() });
-    });
+
+    // Fetch author details and construct comments array
+    await Promise.all(
+      snapshot.docs.map(async (doc) => {
+        const commentData = doc.data();
+        const authorRef = commentData.author;
+        const authorSnapshot = await authorRef.get();
+        const authorData = authorSnapshot.data();
+
+        comments.push({
+          id: doc.id,
+          author: {
+            name: authorData.name, // Replace with the actual field name for the author's name
+            uid: authorData.uid, // Replace with the actual field name for the author's UID
+          },
+          content: commentData.content,
+          created_at: commentData.created_at,
+          likes_count: commentData.likes_count,
+          post: commentData.post,
+        });
+      })
+    );
 
     res.json(comments);
   } catch (error) {
