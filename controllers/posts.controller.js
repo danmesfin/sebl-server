@@ -8,6 +8,24 @@ async function getAllPosts(req, res) {
     snapshot.forEach((doc) => {
       posts.push({ id: doc.id, ...doc.data() });
     });
+    // Fetch author details and construct comments array
+    await Promise.all(
+      snapshot.docs.map(async (post) => {
+        const postData = post.data();
+        const authorRef = postData.author;
+        const authorSnapshot = await authorRef.get();
+        const authorData = authorSnapshot.data();
+
+        posts.push({
+          id: post.id,
+          author: {
+            name: authorData.name, // Replace with the actual field name for the author's name
+            uid: authorData.uid, // Replace with the actual field name for the author's UID
+          },
+          ...postData,
+        });
+      })
+    );
     res.json(posts);
   } catch (error) {
     console.error(error);
@@ -22,7 +40,20 @@ async function getPost(req, res) {
     if (!post.exists) {
       return res.status(404).json({ error: "Post not found" });
     }
-    res.json({ id: post.id, ...post.data() });
+
+    const postData = post.data();
+    const authorRef = postData.author;
+    const authorSnapshot = await authorRef.get();
+    const authorData = authorSnapshot.data();
+
+    res.json({
+      id: post.id,
+      author: {
+        name: authorData.name, // Replace with the actual field name for the author's name
+        uid: authorData.uid, // Replace with the actual field name for the author's UID
+      },
+      ...postData,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Something went wrong" });
@@ -36,10 +67,9 @@ async function createPost(req, res) {
       title,
       content,
       post_image_url,
-      author: req.user.uid, // using the decoded token from the middleware == req.user.uid,
+      author: db.collection("users").doc(req.user.uid),
       created_at: new Date(),
       likes_count: 0,
-      dislikes_count: 0,
     });
     res.json({ id: newPost.id });
   } catch (error) {
