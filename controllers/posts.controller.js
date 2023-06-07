@@ -1,5 +1,7 @@
 const { db } = require("../config/firebase-config");
 
+const profanityCheck = require("../services/profanity_check");
+
 // Get all posts
 async function getAllPosts(req, res) {
   try {
@@ -72,6 +74,12 @@ async function getPost(req, res) {
 async function createPost(req, res) {
   try {
     const { title, content, post_image_url } = req.body;
+
+    // check for profanity in post content/title
+    if (profanityCheck(content) || profanityCheck(title)) {
+      return res.status(500).json({error:"There is profanity in the post"})
+    }
+
     const newPost = await db.collection("posts").add({
       title,
       content,
@@ -90,6 +98,12 @@ async function createPost(req, res) {
 async function updatePost(req, res) {
   try {
     const { title, content, post_image_url } = req.body;
+
+    // check for profanity in post content/title
+    if (profanityCheck(content) || profanityCheck(title)) {
+      return res.status(500).json({error:"There is profanity in the post"})
+    }
+    
     const postRef = db.collection("posts").doc(req.params.postId);
     const post = await postRef.get();
     if (!post.exists) {
