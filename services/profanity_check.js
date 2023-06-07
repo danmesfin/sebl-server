@@ -2,7 +2,7 @@ const TextFilter = require('bad-words');
 
 const filter = new TextFilter();
 
-async function profanityFilter(text) {
+function profanityFilter(text) {
     if (filter.isProfane(text)) {
         return true
     }
