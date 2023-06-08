@@ -1,9 +1,17 @@
 const { db } = require("../config/firebase-config");
 
+const profanityCheck = require("../services/profanity_check");
+
 // Create a new comment
 async function createComment(req, res) {
   try {
     const { content, post_id } = req.body;
+    
+    // check for profanity in comment content
+    if (profanityCheck(content)) {
+      return res.status(500).json({error:"There is profanity in the comment"})
+    }
+
     const newComment = await db.collection("comments").add({
       content,
       author: db.collection("users").doc(req.user.uid),
@@ -76,6 +84,12 @@ async function getComment(req, res) {
 async function updateComment(req, res) {
   try {
     const { content } = req.body;
+
+    // check for profanity in comment content
+    if (profanityCheck(content)) {
+      return res.status(500).json({error:"There is profanity in the comment"})
+    }
+
     const commentRef = db.collection("comments").doc(req.params.commentId);
     const comment = await commentRef.get();
     if (!comment.exists) {
