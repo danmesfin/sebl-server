@@ -9,6 +9,6 @@ router.post("/register", postsController.createUser);
 router.get("/", postsController.getAllUsers);
 
 // Get user by ID
-router.get("/:id", postsController.getUserById);
+router.get("/profile", postsController.getUserById);
 
 module.exports = router;
