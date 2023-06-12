@@ -51,12 +51,18 @@ const getDiseaseControlMethodsByDiseaseName = async (req, res) => {
 // Create a new disease control method
 async function createDiseaseControlMethod(req, res) {
   try {
-    const { diseaseName, title, naturalControl, chemicalControl } = req.body;
+    const {
+      diseaseName,
+      controlMethods,
+      pesticideRecommendations,
+      additionalInfo,
+    } = req.body;
 
     await db.collection(DISEASE_CONTROL_COLLECTION).doc(diseaseName).set({
-      title: title,
-      naturalControl: naturalControl,
-      chemicalControl: chemicalControl,
+      diseaseName,
+      controlMethods,
+      pesticideRecommendations,
+      additionalInfo,
     });
 
     console.log(`Disease control method created for ${diseaseName}`);
