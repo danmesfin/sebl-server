@@ -39,7 +39,8 @@ async function getAllUsers(req, res) {
 // Get a user by ID
 async function getUserById(req, res) {
   try {
-    const userRef = db.collection("users").doc(req.params.id);
+    const { uid } = req.user;
+    const userRef = db.collection("users").doc(uid);
     const user = await userRef.get();
     if (!user.exists) {
       return res.status(404).json({ error: "User not found" });
